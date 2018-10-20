@@ -1,5 +1,6 @@
 package blog.app.Blog.models.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,4 +32,13 @@ public class Post {
     private Set<PostComment> comments = new HashSet<>();
 
 
+    public Post(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
+    public void addComment(PostComment postComment) {
+        comments.add(postComment);
+        postComment.setPost(this);
+    }
 }
