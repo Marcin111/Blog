@@ -28,7 +28,7 @@ public class Post {
     @Embedded
     private AuditEntity audit = new AuditEntity();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private Set<PostComment> comments = new HashSet<>();
 
 
@@ -36,6 +36,12 @@ public class Post {
         this.title = title;
         this.content = content;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    @Getter
+    @Setter
+    private User user;
 
     public void addComment(PostComment postComment) {
         comments.add(postComment);
